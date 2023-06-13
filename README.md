@@ -14,7 +14,7 @@ Zinduo app aims to ease language learning with interactive learning session and 
 - [Introduction](#introduction)
 - [Installation](#install)
 - [Features](#features)
-- [Technologies](#Technology used)
+- [Technology](#technology)
 - [Usage](#usage)
 - [In-App Screens](#in-app)
 - [Future Plans](#future-plans)
