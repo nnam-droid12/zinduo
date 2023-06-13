@@ -14,6 +14,7 @@ Zinduo app aims to ease language learning with interactive learning session and 
 - [Introduction](#introduction)
 - [Installation](#install)
 - [Features](#features)
+- [Technologies](#Technology used)
 - [Usage](#usage)
 - [In-App Screens](#in-app)
 - [Future Plans](#future-plans)
@@ -61,6 +62,18 @@ If you wish to build codes locally, clone this repository with the command
 3. **Flash Cards Learnng**: Use flash cards to quickly remember what you have learnt and take a note of it.
 
 
+<a name="technology"></a>
+## Technologies Used
+
+1. Appwrite Cloud
+- authentication
+- database
+- realtime 
+
+2. Flutter
+3. Google Translate API
+
+
 <a name="usage"></a>
 ##  Usage
 
@@ -72,7 +85,7 @@ Our app offers a Screen for better user experience and accessibility:
 </br>
 
 <a name="in-app"></a>
-## <img width="20" alt="image" src="./dev_assets/logo_size.png"> In-App Screens
+## <img width="20" alt="image" src="./dev_assets/logo_size.jpg"> In-App Screens
 
 ### Registration screen
 <img src="./dev_assets/zinduo-register.png">
