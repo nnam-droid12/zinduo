@@ -5,7 +5,7 @@
 
 Welcome to Zinduo, an innovative mobile application designed to enhance the language learning experience of users using quizzes, Flash cards and user flexibility of learning any word they wish to in other languages
 
-Zinduo app aims to ease language learning withour interactive learning session and making learning fun.
+Zinduo app aims to ease language learning with interactive learning session and making learning fun.
 
 </br>
 
