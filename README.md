@@ -26,7 +26,7 @@ Zinduo app aims to ease language learning with interactive learning session and 
 <a name="introduction"></a>
 ##  Introduction
 
-Zindo is an innovative mobile application aimed at enhancing Users Language learning process
+Zinduo is an innovative mobile application aimed at enhancing Users Language learning process
 
 ### IMPACT
 
@@ -111,6 +111,6 @@ Our app offers a Screen for better user experience and accessibility:
 
 ### All of the source codes are available here.
 
-- INOP LEARN APP SOURCE CODE [@nnam-droid12](https://github.com/nnam-droid12/zinduo)
+- ZINDUO APP SOURCE CODE [@nnam-droid12](https://github.com/nnam-droid12/zinduo)
 
 </br>

@@ -13,7 +13,7 @@ class UserRegistration extends StatefulWidget {
 class _UserRegistrationState extends State<UserRegistration> {
   final client = Client()
       .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-      .setProject('6483b4f02c6c2450fb51'); // Your project ID
+      .setProject('64899d39467825fdf608'); // Your project ID
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

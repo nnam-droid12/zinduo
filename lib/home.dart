@@ -3,6 +3,9 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:translator/translator.dart';
 import 'package:zinduo/quiz_screen.dart';
 import 'FlagButton.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:appwrite/appwrite.dart';
+import 'package:uuid/uuid.dart';
 
 class HomeScreen extends StatefulWidget {
   final String name;
@@ -17,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   FlutterTts flutterTts = FlutterTts();
   GoogleTranslator translator = GoogleTranslator();
   String inputText = '';
+  String documentId = const Uuid().v4();
 
   bool _loading = false;
   List<String> _translatedTexts = [];
@@ -33,6 +37,33 @@ class _HomeScreenState extends State<HomeScreen> {
     'ig'
   ];
 
+  Client client = Client()
+      .setEndpoint('https://cloud.appwrite.io/v1')
+      .setProject('64899d39467825fdf608');
+
+  Future<void> saveTranslation(String translatedText) async {
+    try {
+      const databaseId = '64899e8f6b358b757dd4';
+      const collectionId = '64899ea6dda3d7dd42b0';
+
+      Databases databases = Databases(client);
+      await databases.createDocument(
+        databaseId: databaseId,
+        collectionId: collectionId,
+        documentId: documentId,
+        data: {'text': translatedText},
+      );
+
+      // Show success message to the user
+      Fluttertoast.showToast(msg: 'Translation saved successfully');
+    } catch (e) {
+      // Show error message to the user
+      Fluttertoast.showToast(msg: 'Failed to save translation');
+      // ignore: avoid_print
+      print(e);
+    }
+  }
+
   Future translate() async {
     List<String> translatedTexts = [];
     setState(() {
@@ -46,8 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _translatedTexts = translatedTexts;
       _loading = false;
+      // ignore: avoid_print
       print(_translatedTexts);
     });
+
+    // Save the translated text to the Appwrite database
+    if (_translatedTexts.isNotEmpty) {
+      saveTranslation(_translatedTexts[0]);
+    }
   }
 
   Future speak(String languageCode, String text) async {
@@ -133,6 +170,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('en-US', _translatedTexts[0]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[0]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 30.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -144,6 +191,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('en-GB', _translatedTexts[0]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[0]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 30.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -155,6 +212,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('ru-RU', _translatedTexts[1]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[1]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 30.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -165,6 +232,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('fr-FR', _translatedTexts[2]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[2]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -176,6 +253,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('zh-CN', _translatedTexts[3]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[3]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -186,6 +273,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('hi-IN', _translatedTexts[4]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[4]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -196,6 +293,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('de-DE', _translatedTexts[5]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[5]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -207,6 +314,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('it-IT', _translatedTexts[6]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[6]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -218,6 +335,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('es-ES', _translatedTexts[7]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[7]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
@@ -229,15 +356,37 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('ja-JP', _translatedTexts[8]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[8]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 30.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
                 FlagButton(
-                  text: _translatedTexts.isEmpty ? 'Igbo Amaka' : _translatedTexts[9],
+                  text: _translatedTexts.isEmpty
+                      ? 'Igbo Amaka'
+                      : _translatedTexts[9],
                   flag: 'igbo.png',
                   onTap: () {
                     if (_translatedTexts.isNotEmpty) {
                       speak('ig', _translatedTexts[9]);
+                      Fluttertoast.showToast(
+                        msg: _translatedTexts.isNotEmpty
+                            ? _translatedTexts[9]
+                            : 'Translation not available',
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 30.0,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                     }
                   },
                 ),
