@@ -18,6 +18,7 @@ Zinduo app aims to ease language learning with interactive learning session and 
 - [Usage](#usage)
 - [In-App Screens](#in-app)
 - [Future Plans](#future-plans)
+- [License](#license)
 
 </br>
 
@@ -114,3 +115,8 @@ Our app offers a Screen for better user experience and accessibility:
 - ZINDUO APP SOURCE CODE [@nnam-droid12](https://github.com/nnam-droid12/zinduo)
 
 </br>
+
+<a name="license"></a>
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/nnam-droid12/zinduo/blob/main/LICENSE) file for details.
