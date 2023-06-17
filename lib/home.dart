@@ -6,6 +6,7 @@ import 'FlagButton.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HomeScreen extends StatefulWidget {
   final String name;
@@ -37,19 +38,32 @@ class _HomeScreenState extends State<HomeScreen> {
     'ig'
   ];
 
-  Client client = Client()
-      .setEndpoint('https://cloud.appwrite.io/v1')
-      .setProject('64899d39467825fdf608');
+  late Client client;
+  late String appwriteEndpoint;
+  late String appwriteProjectId;
+  late String appwriteDatabaseId;
+  late String appwriteCollectionId;
+
+
+ @override
+  void initState() {
+    super.initState();
+    appwriteEndpoint = dotenv.env['APPWRITE_ENDPOINT'] ?? '';
+    appwriteProjectId = dotenv.env['APPWRITE_PROJECT_ID'] ?? '';
+    appwriteDatabaseId = dotenv.env['APPWRITE_DATABASE_ID'] ?? '';
+    appwriteCollectionId = dotenv.env['APPWRITE_COLLECTION_ID'] ?? '';
+    client = Client()
+      .setEndpoint(appwriteEndpoint)
+      .setProject(appwriteProjectId);
+  }
 
   Future<void> saveTranslation(String translatedText) async {
     try {
-      const databaseId = '64899e8f6b358b757dd4';
-      const collectionId = '64899ea6dda3d7dd42b0';
 
       Databases databases = Databases(client);
       await databases.createDocument(
-        databaseId: databaseId,
-        collectionId: collectionId,
+        databaseId:  appwriteDatabaseId,
+        collectionId: appwriteCollectionId,
         documentId: documentId,
         data: {'text': translatedText},
       );
@@ -94,6 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await flutterTts.setSpeechRate(0.5);
     await flutterTts.speak(text);
   }
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:zinduo/home.dart';
 import 'package:zinduo/user_login.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class UserRegistration extends StatefulWidget {
   const UserRegistration({super.key});
@@ -11,14 +11,26 @@ class UserRegistration extends StatefulWidget {
 }
 
 class _UserRegistrationState extends State<UserRegistration> {
-  final client = Client()
-      .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-      .setProject('64899d39467825fdf608'); // Your project ID
+
+  late Client client;
+  late String appwriteEndpoint;
+  late String appwriteProjectId;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
   String passwordErrorMessage = '';
+
+  
+@override
+void initState() {
+    super.initState();
+    appwriteEndpoint = dotenv.env['APPWRITE_ENDPOINT'] ?? '';
+    appwriteProjectId = dotenv.env['APPWRITE_PROJECT_ID'] ?? '';
+    client = Client()
+      .setEndpoint(appwriteEndpoint)
+      .setProject(appwriteProjectId);
+  }
 
   Future<void> registerUser() async {
     final password = passwordController.text;

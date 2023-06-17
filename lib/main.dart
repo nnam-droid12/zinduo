@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:zinduo/home.dart';
+// import 'package:zinduo/home.dart';
 import 'package:zinduo/user_registration.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+   await dotenv.load();
   runApp(const MyApp());
 }
 
